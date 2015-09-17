@@ -367,6 +367,7 @@ class FellesComboBox(wx.wx.ComboBox):
         if not self.arg:
             self.target(event.GetEventObject().GetValue())
         else:
+            print 'self.arg = ',self.arg
             self.target(self.arg, event.GetEventObject().GetValue())
 
 
@@ -423,7 +424,66 @@ class FellesTextInput(wx.SpinCtrlDouble): #(wx.SpinCtrl):
         if not self.arg:
             self.target(event.GetEventObject().GetValue())
         else:
+            # print 'self.arg = ',self.arg
             self.target(self.arg, event.GetEventObject().GetValue())
+            # self.target(event.GetEventObject().GetValue())
+
+# =============================== Class ====================================== #
+class FellesPlainTextInput(wx.TextCtrl): #(wx.SpinCtrl):
+    """
+    Class
+
+    args:
+        target
+        source
+        min
+        max
+        initial
+    """
+    # ------------------------------- Method --------------------------------- #
+    def __init__(self, parent = None, *args, **kwargs):
+
+        self.source = kwargs['source']
+        self.target = kwargs['target']
+        del kwargs['target']
+        del kwargs['source']
+
+        self.arg = None
+        if kwargs.has_key('arg'):
+            self.arg = kwargs['arg']
+            del kwargs['arg']
+
+        if not kwargs.has_key('name'):
+            kwargs['name'] = self.source.GetName()
+
+        # if not kwargs.has_key('max'):
+        #     kwargs['max'] = 1
+
+        # if not kwargs.has_key('min'):
+        #     kwargs['min'] = 0
+
+        if not kwargs.has_key('initial'):
+            kwargs['initial'] = kwargs['min']
+
+        if not kwargs.has_key('value'):
+            kwargs['value'] = '%f' %(kwargs['initial'])
+
+        # if not kwargs.has_key('inc'):
+        #     kwargs['inc'] = 0.01
+
+        super(FellesPlainTextInput, self).__init__(parent, *args, **kwargs)
+
+#        self.Bind(wx.EVT_SPINCTRL, self.OnSetpointChange)
+        # self.Bind(wx.EVT_SPINCTRLDOUBLE, self.OnSetpointChange)
+
+    # ------------------------------- Method --------------------------------- #
+    # def OnSetpointChange(self, event):
+    #     if not self.arg:
+    #         self.target(event.GetEventObject().GetValue())
+    #     else:
+    #         # print 'self.arg = ',self.arg
+    #         self.target(self.arg, event.GetEventObject().GetValue())
+            # self.target(event.GetEventObject().GetValue())
 
 # =============================== Class ====================================== #
 class FellesSlider(wx.Slider):

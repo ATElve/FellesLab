@@ -261,7 +261,8 @@ class DataStorage(object):
 
     # ------------------------------- Method -------------------------------- #
     def Scale(self, val):
-        return val # self.owner['calibrationCurve'](val)
+        # return val # self.owner['calibrationCurve'](val)
+        return self.owner['calibrationCurve'](val)
 
 
     # ------------------------------- Method -------------------------------- #
@@ -303,7 +304,12 @@ class DataStorage(object):
     def Update(self, time, val):
         """ Method updating the history
         """
-        self['data'] = val #self.owner['calibrationCurve'](val)
+        # self['data'] = val #self.owner['calibrationCurve'](val)
+        try:
+            self['data'] = self.owner['calibrationCurve'](val)
+        except:
+            self['data'] = 0.0
+        # self['data'] = self.owner['calibrationCurve'](val)
         self['time'] = time
 
         if self.owner.SAVE:

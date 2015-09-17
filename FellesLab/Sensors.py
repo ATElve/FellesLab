@@ -169,6 +169,8 @@ class SensorFrame(FellesFrame):
         super(SensorFrame, self).__init__( *args, **kwargs)
 
         self.sensors = sensors
+        # for s in self.sensors:
+        #     print s
         # Dictionary keeping track of which sensors to plot
         self.plot_config = { s.GetID() : s['plot'] for s in self.sensors}
 
@@ -201,6 +203,9 @@ class SensorFrame(FellesFrame):
             except:
                 s().data['data'] = random()
                 s().data['time'] = random()
+            # print s().data[None]
+
+        # print 's :', s.GetID()
 
         self.gLabel = { s.GetID() : FellesLabel(self.panel, wx.ID_ANY,\
                                                   label=s['label'],\
@@ -211,6 +216,11 @@ class SensorFrame(FellesFrame):
                                              label='%.2f'%s().data['data'][-1],\
                                                       style=wx.ALIGN_CENTER )\
                                                       for s in self.sensors }
+        # self.gValue = { s.GetID() : FellesLabel(self.panel, wx.ID_ANY,\
+        #                                      label='asdf',\
+        #                                               style=wx.ALIGN_CENTER )\
+        #                                               for s in self.sensors }
+        # self.gValue = { s.GetID() : FellesLabel(self.panel, wx.ID_ANY, label = 'hei')}
 
         self.gSetpt = { s.GetID():FellesTextInput(
                                     self.panel, value='%s' %s['sample_speed'],

@@ -28,7 +28,9 @@ from FellesBase import FellesBaseClass
 from Equipment import Equipment, Pump
 from Sensors import Sensor, Temperature, Voltage, Pressure, SensorFrame
 from Sensors import Consentration, Humidity
-from Controllers import Controller, AlicatFlowController
+from Controllers import Controller, AlicatFlowController, \
+AlicatPressureController, AlicatLiquidController
+
 
 from GUI import FellesApp, FellesButton, FellesFrame, FellesLabel, FellesTextInput
 from SupportClasses import ExtendedRef, GuiUpdater, DataStorage
